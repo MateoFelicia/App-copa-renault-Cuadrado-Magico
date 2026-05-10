@@ -5,12 +5,6 @@ from flask import redirect, url_for
 
 app = Flask(__name__)
 
-# Ruta principal
-@app.route("/")
-def inicio():
-    return render_template("index.html")
-
-
 @app.route("/registro", methods=["POST"])
 def registro():
     nombre = request.form["nombre"]
@@ -28,23 +22,7 @@ def registro():
     conexion.commit()
     conexion.close()
 
+
     from flask import redirect, url_for
 
     return redirect(url_for("usuarios"))
-
-@app.route("/usuarios")
-def usuarios():
-    import sqlite3
-
-    conexion = sqlite3.connect("database.db")
-    cursor = conexion.cursor()
-
-    cursor.execute("SELECT * FROM usuarios")
-    datos = cursor.fetchall()
-
-    conexion.close()
-
-    return render_template("usuarios.html", usuarios=datos)
-
-if __name__ == "__main__":
-    app.run(debug=True)
