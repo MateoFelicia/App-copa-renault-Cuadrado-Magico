@@ -59,7 +59,7 @@
 
 <script>
     const track = document.getElementById('track');
-    const total = {{ imagenes | length }};
+    const total = document.querySelectorAll('#track img').length;
     let actual = 0;
 
     setInterval(() => {
