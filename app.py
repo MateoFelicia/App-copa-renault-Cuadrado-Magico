@@ -12,7 +12,23 @@ app = Flask(__name__)
 
 @app.route("/")
 def inicio_():
-    return render_template("inicio.html")
+    noticias = [
+        {
+            "id": 1,
+            "titulo": "Resultados de la jornada 2",
+            "descripcion": "Repasá todos los goles, posiciones y figuras destacadas del fin de semana.",
+            "fecha": "12 Jun 2025",
+            "imagen": "https://example.com/foto1.jpg"
+        },
+        {
+            "id": 2,
+            "titulo": "Convocatoria para la jornada 3",
+            "descripcion": "Ya están confirmados los horarios y canchas para el próximo fin de semana.",
+            "fecha": "10 Jun 2025",
+            "imagen": "https://example.com/foto2.jpg"
+        },
+    ] # Obtener desde la Base de Datos las noticias ordenadas desde la mas reciente a la mas antigua
+    return render_template("inicio.html", noticias=noticias)
 
 @app.route("/partidos", defaults={"categoria": "Todas", "deporte": "Todos", "genero": "Todos"})
 @app.route("/partidos/<categoria>/<deporte>/<genero>")
@@ -22,7 +38,7 @@ def partidos(categoria, deporte, genero):
         {"hora": "16:30", "equipo_local": "Renault B", "equipo_visitante": "San Martín", "categoria": "Menor", "genero": "Masculino", "deporte": "Fútbol", "estado": "prox"},
         {"hora": "18:00", "equipo_local": "Renault A", "equipo_visitante": "Godoy Cruz", "categoria": "Mayor", "genero": "Femenino", "deporte": "Fútbol", "estado": "prox"},
         {"hora": "19:00", "equipo_local": "Renault C", "equipo_visitante": "Huracán", "categoria": "Menor", "genero": "Mixto", "deporte": "Básquet", "estado": "prox"},
-    ]
+    ] # Estos son los partidos de la base de datos
 
     filtrados = []
 
@@ -52,9 +68,9 @@ def mapa():
 def noticias():
     return render_template("noticias.html")
 
-@app.route("/mas")
-def mas():
-    return render_template("mas.html")
+@app.route("/cantina")
+def cantina():
+    return render_template("cantina.html")
 
 # @app.route("/registro", methods=["POST"])
 # def registro():
