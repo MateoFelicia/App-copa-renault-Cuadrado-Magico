@@ -1,0 +1,45 @@
+{% macro partido(
+hora,
+equipo_local,
+equipo_visitante,
+goles_local = none,
+goles_visitante = none,
+categoria = "Mayor",
+estado = "prox",
+minuto = none
+) %}
+
+<div>
+    <div>
+        <span>{{ hora }}</span>
+
+        {% if estado == "terminado" %}
+        <span>Terminado</span>
+
+        {% elif estado == "live" %}
+        <span>Jugando'</span>
+
+        {% else %}
+        {% endif %}
+    </div>
+
+    <div>
+        <div>
+            {{ categoria }}
+        </div>
+
+        <div>{{ equipo_local }}</div>
+        <div>{{ equipo_visitante }}</div>
+    </div>
+
+    <div>
+        {% if goles_local is not none %}
+        <span>{{ goles_local }}</span>
+        <span>{{ goles_visitante }}</span>
+        {% else %}
+        <span> - </span>
+        <span> - </span>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}

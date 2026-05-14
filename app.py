@@ -13,15 +13,23 @@ app = Flask(__name__)
 @app.route("/")
 def inicio_():
     return render_template("inicio.html")
-@app.route("/fixture_y_partidos")
-def fixture_y_partidos():
-    return render_template("fixture_y_partidos.html")
-@app.route("/")
+
+@app.route("/partidos")   
+def partidos():
+    return render_template("partidos.html")
+
+@app.route("/fixture")   
+def fixture():
+    return render_template("fixture.html")
+
+@app.route("/mapa")
 def mapa():
     return render_template("mapa.html")
-@app.route("/")
+
+@app.route("/noticias")
 def noticias():
     return render_template("noticias.html")
+
 @app.route("/mas")
 def mas():
     return render_template("mas.html")
