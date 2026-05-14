@@ -5,7 +5,7 @@ from flask import redirect, url_for
 
 app = Flask(__name__)
 
-@app.route("/usuarios")
+@app.route("/usuarios", methods=["GET"])
 def usuarios():
     import sqlite3
 

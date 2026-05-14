@@ -5,7 +5,7 @@ from flask import redirect, url_for
 
 app = Flask(__name__)
 
-@app.route("/registro", methods=["POST"])
+@app.route("/registro", methods=["POST"]) # get, delete, upgrade
 def registro():
     nombre = request.form["nombre"]
     email = request.form["email"]
