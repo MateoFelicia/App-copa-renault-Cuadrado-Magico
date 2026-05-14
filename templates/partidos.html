@@ -1,0 +1,59 @@
+{% extends "navbar.html" %}
+{% from "_partido_macro.html" import partido %}
+
+{% block title %}Partidos – Fixture{% endblock %}
+
+{% block content %}
+
+<div style="padding: 24px 16px 8px;">
+    <h1 style="font-size: 22px; font-weight: 800;">
+        FIXTURE
+    </h1>
+    <div class="filtros">
+        {% for cat in ["Todas", "Mayor", "Intermedia", "Menor"] %}
+            <a href="/partidos/?categoria={{ cat }}">
+                <button>{{ cat }}</button>
+            </a>
+    {% endfor %}
+    </div>
+
+    <div class="filtros" style="margin-top: 8px;">
+        {% for deporte in ["Todos", "Fútbol", "Básquet", "Vóley"] %}
+        <button onclick=''>{{ deporte }}</button>
+        {% endfor %}
+    </div>
+
+</div>
+{% set partidos = [
+    {
+        "hora": "16:30",
+        "equipo_local": "Renault B",
+        "equipo_visitante": "San Martín",
+        "categoria": "Menor",
+        "estado": "prox"
+    },
+    {
+        "hora": "16:30",
+        "equipo_local": "Renault B",
+        "equipo_visitante": "San Martín",
+        "categoria": "Menor",
+        "estado": "prox"
+    }
+] %}
+
+    {% for p in partidos %}
+        {% if categoria is not defined or p.categoria == categoria %}
+            {{ partido(
+                hora = p.hora,
+                equipo_local = p.equipo_local,
+                equipo_visitante = p.equipo_visitante,
+                categoria = p.categoria,
+                estado = p.estado
+            )}}
+        {% endif %}
+    {% endfor %}
+
+<script>
+</script>
+
+{% endblock %}
