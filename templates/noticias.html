@@ -1,8 +1,31 @@
 {% extends "navbar.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Noticias{% endblock %}
 
 {% block content %}
-<h1>Inicio</h1>
-<p>Bienvenido a el inicio de la app</p>
+
+<div class="container">
+
+    <h1 class="page-title">
+        Noticias
+    </h1>
+
+    <div class="card">
+        <h2>Torneo Apertura</h2>
+
+        <p class="muted">
+            Renault venció 3-1 a Huracán en un partido intenso.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Próxima Fecha</h2>
+
+        <p class="muted">
+            El próximo sábado se jugarán las semifinales.
+        </p>
+    </div>
+
+</div>
+
 {% endblock %}

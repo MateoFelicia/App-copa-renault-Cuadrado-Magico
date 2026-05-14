@@ -5,8 +5,10 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/partidos.css') }}">
+
 <div style="padding: 24px 16px 8px;">
-    <h1 style="font-size: 22px; font-weight: 800;">PARTIDOS</h1>
+    <h1 class="titulo-partidos">PARTIDOS</h1>
 
     <div class="filtros">
         {% for cat in ["Todas", "Mayor", "Intermedia", "Menor"] %}
@@ -45,6 +47,10 @@
         hora = p.hora,
         equipo_local = p.equipo_local,
         equipo_visitante = p.equipo_visitante,
+
+        goles_local = p.goles_local,
+        goles_visitante = p.goles_visitante,
+
         deporte = p.deporte,
         genero = p.genero,
         categoria = p.categoria,

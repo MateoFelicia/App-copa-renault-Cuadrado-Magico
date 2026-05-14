@@ -9,45 +9,85 @@ genero = none,
 categoria = none,
 estado = "prox",
 minuto = none
+
 ) %}
 
-<div>
-    <div>
-        <span>{{ hora }}</span>
+<div class="partido-card">
+
+    <!-- TOP -->
+    <div class="partido-top">
+
+        <span class="partido-hora">
+            {{ hora }}
+        </span>
 
         {% if estado == "terminado" %}
-        <span>Terminado</span>
+            <span class="estado estado-fin">
+                FINALIZADO
+            </span>
 
         {% elif estado == "live" %}
-        <span>Jugando'</span>
+            <span class="estado estado-live">
+                EN VIVO
+            </span>
 
         {% else %}
+            <span class="estado estado-prox">
+                PRÓXIMO
+            </span>
         {% endif %}
+
     </div>
 
-    <div>
-        <div>
+    <!-- TAGS -->
+    <div class="partido-tags">
+
+        <span class="tag">
             {{ deporte }}
-        </div>
-        <div>
+        </span>
+
+        <span class="tag">
             {{ genero }}
-        </div>
-        <div>
+        </span>
+
+        <span class="tag">
             {{ categoria }}
+        </span>
+
+    </div>
+
+    <!-- EQUIPOS -->
+    <div class="partido-equipos">
+
+        <div class="equipos">
+
+            <div class="equipo">
+                {{ equipo_local }}
+            </div>
+
+            <div class="equipo">
+                {{ equipo_visitante }}
+            </div>
+
         </div>
 
-        <div>{{ equipo_local }}</div>
-        <div>{{ equipo_visitante }}</div>
+        <!-- RESULTADO -->
+        <div class="resultado">
+
+            {% if goles_local is not none %}
+                <span>{{ goles_local }}</span>
+                <span>-</span>
+                <span>{{ goles_visitante }}</span>
+
+            {% else %}
+                <span>-</span>
+                <span>-</span>
+            {% endif %}
+
+        </div>
+
     </div>
 
-    <div>
-        {% if goles_local is not none %}
-        <span>{{ goles_local }}</span>
-        <span>{{ goles_visitante }}</span>
-        {% else %}
-        <span> - </span>
-        <span> - </span>
-        {% endif %}
-    </div>
 </div>
+
 {% endmacro %}

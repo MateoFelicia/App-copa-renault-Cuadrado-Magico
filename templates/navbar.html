@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     {% block content %}{% endblock %}
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('inicio_') }}">Inicio</a></li>
-            <li><a href="{{ url_for('partidos') }}">Fixture</a></li>
-            <li><a href="{{ url_for('mapa') }}">Mapa</a></li>
-            <li><a href="{{ url_for('noticias') }}">Noticias</a></li>
-            <li><a href="{{ url_for('mas') }}">Mas</a></li>
-        </ul>
+    <nav class="navbar">
+
+        <div class="logo">
+            COPA RENAULT
+        </div>
+
+        <div class="nav-links">
+
+            <a class="nav-link" href="/">
+                Inicio
+            </a>
+
+            <a class="nav-link" href="/partidos">
+                Partidos
+            </a>
+
+            <a class="nav-link" href="/fixture">
+                Fixture
+            </a>
+
+            <a class="nav-link" href="/mapa">
+                Mapa
+            </a>
+
+            <a class="nav-link" href="/noticias">
+                Noticias
+            </a>
+
+        </div>
+
     </nav>
 </body>
+                </h1>
+
+            </div>
+
+            {% endblock %}
+
+        </div>
+
+    </nav>
+</body>
+
 </html>

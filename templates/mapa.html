@@ -1,8 +1,36 @@
 {% extends "navbar.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Mapa{% endblock %}
 
 {% block content %}
-<h1>Inicio</h1>
-<p>Bienvenido a el inicio de la app</p>
+
+<div class="container">
+
+    <h1 class="page-title">
+        Mapa
+    </h1>
+
+    <div class="card">
+
+        <h2>Predio Deportivo</h2>
+
+        <p class="muted">
+            Complejo principal donde se disputan los partidos.
+        </p>
+
+        <br>
+
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18..."
+            width="100%"
+            height="350"
+            style="border:0; border-radius: 12px;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+
+    </div>
+
+</div>
+
 {% endblock %}
