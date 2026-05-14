@@ -6,7 +6,7 @@ Inicio
 
 {% block content %}
 
-<div class="container">
+<!-- <div class="container">
 
     <h1 class="page-title">
         Copa Renault
@@ -30,6 +30,64 @@ Inicio
 
     </div>
 
+</div> -->
+
+<div class="inicio-wrapper">
+    <p class="seccion-titulo">Acceso Rápido</p>
+
+    {% set accesos = [
+        {"label": "Fixture", "url": "partidos", "img": "fixture.png"},
+        {"label": "Cantina", "url": "cantina", "img": "cantina.png"},
+        {"label": "Mapa", "url": "mapa", "img": "mapa.png"},
+        {"label": "Noticias","url": "noticias", "img": "noticias.png"}
+    ] %}
+
+    <div class="acceso-grid">
+        {% for a in accesos %}
+        <a href="{{ a.url }}">
+            <img src="{{ url_for('static', filename='img/' + a.img) }}" alt="{{ a.label }}">
+        </a>
+        {% endfor %}
+    </div>
 </div>
+
+<p class="seccion-titulo">Últimas Noticias</p>
+
+<div class="noticias-lista">
+    {% for n in noticias[:3] %}
+    <a href="/noticias/{{ n.id }}" class="noticia-card">
+        <img src="{{ n.imagen }}" alt="{{ n.titulo }}">
+        <div class="noticia-info">
+            <p class="noticia-titulo">{{ n.titulo }}</p>
+            <p class="noticia-desc">{{ n.descripcion }}</p>
+            <p class="noticia-fecha">{{ n.fecha }}</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+<a href="/noticias" class="btn-ver-mas">Ver todas las noticias</a>
+
+<div id="carrusel" style="overflow: hidden; width: 100%; position: relative;">
+    <div id="track" style="display: flex; transition: transform 0.5s ease;">
+        {% for img in sponsors %}
+        <img 
+            src="{{ img }}"
+            style="min-width: 100%; height: 200px; object-fit: cover;"
+        >
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    const track = document.getElementById('track');
+    const total = document.querySelectorAll('#track img').length;
+    let actual = 0;
+
+    setInterval(() => {
+        actual = (actual + 1) % total;
+        track.style.transform = `translateX(-${actual * 100}%)`;
+    }, 3000);
+</script>
 
 {% endblock %}
