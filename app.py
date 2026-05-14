@@ -12,6 +12,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def inicio_():
+    sponsors = [
+        "https://cdn.iconscout.com/icon/free/png-256/free-coca-cola-logo-icon-svg-download-png-1579762.png",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8il-Fph_iLce9tKXGbAh978ujKjX1ivZvZg&s",
+        "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sprite_Logo.svg"
+    ] # Obtener desde la Base de Datos las imagenes de los sponsor
     noticias = [
         {
             "id": 1,
@@ -28,7 +33,7 @@ def inicio_():
             "imagen": "https://example.com/foto2.jpg"
         },
     ] # Obtener desde la Base de Datos las noticias ordenadas desde la mas reciente a la mas antigua
-    return render_template("inicio.html", noticias=noticias)
+    return render_template("inicio.html", noticias=noticias, sponsors=sponsors)
 
 @app.route("/partidos", defaults={"categoria": "Todas", "deporte": "Todos", "genero": "Todos"})
 @app.route("/partidos/<categoria>/<deporte>/<genero>")

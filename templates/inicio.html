@@ -40,15 +40,9 @@
 
 <a href="/noticias" class="btn-ver-mas">Ver todas las noticias</a>
 
-{% set imagenes = [
-    "https://cdn.iconscout.com/icon/free/png-256/free-coca-cola-logo-icon-svg-download-png-1579762.png",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8il-Fph_iLce9tKXGbAh978ujKjX1ivZvZg&s",
-    "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sprite_Logo.svg"
-] %}
-
 <div id="carrusel" style="overflow: hidden; width: 100%; position: relative;">
     <div id="track" style="display: flex; transition: transform 0.5s ease;">
-        {% for img in imagenes %}
+        {% for img in sponsors %}
         <img 
             src="{{ img }}"
             style="min-width: 100%; height: 200px; object-fit: cover;"
