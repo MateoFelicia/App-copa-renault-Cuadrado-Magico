@@ -55,7 +55,7 @@ Inicio
 
 <div class="noticias-lista">
     {% for n in noticias[:3] %}
-    <a href="/noticias/{{ n.id }}" class="noticia-card">
+    <a href="/noticias/<id>" class="noticia-card">
         <img src="{{ n.imagen }}" alt="{{ n.titulo }}">
         <div class="noticia-info">
             <p class="noticia-titulo">{{ n.titulo }}</p>
