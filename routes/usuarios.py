@@ -7,12 +7,12 @@ app = Flask(__name__)
 
 @app.route("/usuarios", methods=["GET"])
 def usuarios():
-    import sqlite3
+    
 
     conexion = sqlite3.connect("database.db")
     cursor = conexion.cursor()
 
-    cursor.execute("SELECT * FROM usuarios")
+    cursor.execute(f"SELECT * FROM usuarios")
     datos = cursor.fetchall()
 
     conexion.close()

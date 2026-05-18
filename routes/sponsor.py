@@ -7,12 +7,12 @@ app = Flask(__name__)
 
 @app.route("/sponsors", methods=["GET"]) # get, delete, upgrade
 def sponsor():
-    import sqlite3
+    
 
     conexion = sqlite3.connect("database.db")
     cursor = conexion.cursor()
 
-    cursor.execute("SELECT * FROM sponsors")
+    cursor.execute(f"SELECT * FROM sponsors")
     datos = cursor.fetchall()
 
     conexion.close()

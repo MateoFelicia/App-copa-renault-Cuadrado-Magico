@@ -11,7 +11,7 @@ def cantina():
         conexion = sqlite3.connect("database.db")
         cursor = conexion.cursor()
         
-        cursor.execute("SELECT * FROM cantina")
+        cursor.execute(f"SELECT * FROM cantina")
         datos = cursor.fetchall()
         
         conexion.close()
