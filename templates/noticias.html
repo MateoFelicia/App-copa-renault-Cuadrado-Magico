@@ -1,31 +1,37 @@
 {% extends "navbar.html" %}
+{% from "_noticia_macro.html" import noticia %}
+{% from "_noticia_detalle_macro.html" import noticia_detalle %}
 
-{% block title %}Noticias{% endblock %}
+{% block title %}Noticias – Copa Renault{% endblock %}
 
 {% block content %}
 
-<div class="container">
 
-    <h1 class="page-title">
-        Noticias
-    </h1>
-
-    <div class="card">
-        <h2>Torneo Apertura</h2>
-
-        <p class="muted">
-            Renault venció 3-1 a Huracán en un partido intenso.
-        </p>
-    </div>
-
-    <div class="card">
-        <h2>Próxima Fecha</h2>
-
-        <p class="muted">
-            El próximo sábado se jugarán las semifinales.
-        </p>
-    </div>
-
+<div>
+    {% if id %}
+        {% for n in noticias %}
+            {% if n.id | string == id %}
+                {{ noticia_detalle(
+                    id          = n.id,
+                    titulo      = n.titulo,
+                    descripcion = n.descripcion | default(none),
+                    fecha       = n.fecha       | default(none),
+                    imagen      = n.imagen      | default(none)
+                ) }}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h1>Noticias Copa Renault</h1>
+        {% for n in noticias %}
+            {{ noticia(
+                id          = n.id,
+                titulo      = n.titulo,
+                descripcion = n.descripcion | default(none),
+                fecha       = n.fecha       | default(none),
+                imagen      = n.imagen      | default(none)
+            ) }}
+        {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}

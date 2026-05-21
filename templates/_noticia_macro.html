@@ -1,0 +1,27 @@
+{% macro noticia(
+    id,
+    titulo,
+    descripcion = none,
+    fecha = none,
+    imagen = none
+) %}
+
+<a href="/noticias/{{ id }}">
+    {% if imagen %}
+    <img src="{{ imagen }}" alt="{{ titulo }}">
+    {% endif %}
+
+    <div>
+        <p>{{ titulo }}</p>
+
+        {% if descripcion %}
+        <p>{{ descripcion }}</p>
+        {% endif %}
+
+        <div>
+            {% if fecha %}<span>{{ fecha }}</span>{% endif %}
+        </div>
+    </div>
+</a>
+
+{% endmacro %}

@@ -31,8 +31,8 @@ def inicio_():
             "descripcion": "Ya están confirmados los horarios y canchas para el próximo fin de semana.",
             "fecha": "10 Jun 2025",
             "imagen": "https://example.com/foto2.jpg"
-        },
-    ] # Obtener desde la Base de Datos las noticias ordenadas desde la mas reciente a la mas antigua
+        }
+    ] # Obtener desde la Base de Datos las primeras 2 noticias ordenadas desde la mas reciente a la mas antigua
     return render_template("inicio.html", noticias=noticias, sponsors=sponsors)
 
 @app.route("/partidos", defaults={"categoria": "Todas", "deporte": "Todos", "genero": "Todos"})
@@ -40,39 +40,11 @@ def inicio_():
 def partidos(categoria, deporte, genero):
 
     todos = [
-    {
-        "hora": "16:30",
-        "equipo_local": "Renault B",
-        "equipo_visitante": "San Martín",
-        "categoria": "Menor",
-        "genero": "Masculino",
-        "deporte": "Fútbol",
-        "estado": "live",
-        "goles_local": 2,
-        "goles_visitante": 1
-    },
-
-    {
-        "hora": "18:00",
-        "equipo_local": "Renault A",
-        "equipo_visitante": "Godoy Cruz",
-        "categoria": "Mayor",
-        "genero": "Femenino",
-        "deporte": "Fútbol",
-        "estado": "prox"
-    },
-
-    {
-        "hora": "19:00",
-        "equipo_local": "Renault C",
-        "equipo_visitante": "Huracán",
-        "categoria": "Menor",
-        "genero": "Mixto",
-        "deporte": "Básquet",
-        "estado": "terminado",
-        "goles_local": 88,
-        "goles_visitante": 74
-    },
+    {"hora": "16:30", "equipo_local": "Renault B",  "equipo_visitante": "San Martín", "categoria": "Menor",     "genero": "Masculino", "deporte": "Fútbol",  "estado": "prox",      "cancha": "Cancha 1"},
+    {"hora": "18:00", "equipo_local": "Renault A",  "equipo_visitante": "Godoy Cruz", "categoria": "Mayor",     "genero": "Femenino",  "deporte": "Fútbol",  "estado": "prox",      "cancha": "Cancha 2"},
+    {"hora": "19:00", "equipo_local": "Renault C",  "equipo_visitante": "Huracán",    "categoria": "Menor",     "genero": "Mixto",     "deporte": "Básquet", "estado": "prox",      "cancha": "Gimnasio"},
+    {"hora": "13:45", "equipo_local": "Lourdes",    "equipo_visitante": "Belgrano",   "categoria": "Menor",     "genero": "Femenino",  "deporte": "Fútbol",  "estado": "live",      "cancha": "Cancha 3", "goles_local": 0, "goles_visitante": 1},
+    {"hora": "10:30", "equipo_local": "San José",   "equipo_visitante": "Sag. Familia","categoria": "Mayor",    "genero": "Masculino", "deporte": "Fútbol",  "estado": "terminado", "cancha": "Cancha 1", "goles_local": 2, "goles_visitante": 1},
 ]
 
     filtrados = []
@@ -99,9 +71,27 @@ def fixture():
 def mapa():
     return render_template("mapa.html")
 
-@app.route("/noticias")
-def noticias():
-    return render_template("noticias.html")
+@app.route("/noticias", defaults={"id": ""})
+@app.route("/noticias/<id>")
+def noticias(id):
+    noticias = [
+        {
+            "id": 1,
+            "titulo": "Resultados de la jornada 2",
+            "descripcion": "Repasá todos los goles, posiciones y figuras destacadas del fin de semana.",
+            "fecha": "12 Jun 2025",
+            "imagen": "https://example.com/foto1.jpg"
+        },
+        {
+            "id": 2,
+            "titulo": "Convocatoria para la jornada 3",
+            "descripcion": "Ya están confirmados los horarios y canchas para el próximo fin de semana.",
+            "fecha": "10 Jun 2025",
+            "imagen": "https://example.com/foto2.jpg"
+        },
+    ] # Obtener desde la Base de Datos las noticias ordenadas desde la mas reciente a la mas antigua
+    
+    return render_template("noticias.html", noticias=noticias, id=id)
 
 @app.route("/cantina")
 def cantina():
