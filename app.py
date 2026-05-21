@@ -95,7 +95,55 @@ def noticias(id):
 
 @app.route("/cantina")
 def cantina():
-    return render_template("cantina.html")
+    categorias = [
+        {
+            "nombre": "¡¡Super Promos!!",
+            "promo": True,
+            "productos": [
+                {"nombre": "Café + 3 Criollos", "precio": "2.000", "imagen": "https://example.com/promo1.jpg"},
+            ]
+        },
+        {
+            "nombre": "Almuerzo",
+            "productos": [
+                {"nombre": "Choripán",    "precio": "8.000", "imagen": "https://example.com/choripan.jpg"},
+                {"nombre": "Hamburguesa", "precio": "7.000", "imagen": "https://example.com/hamburguesa.jpg"},
+                {"nombre": "Cono de Papas","precio": "4.500", "imagen": "https://example.com/papas.jpg"},
+            ]
+        },
+        {
+            "nombre": "Golosina",
+            "productos": [
+                {"nombre": "Alfajor Gulero",     "precio": "2.000", "imagen": "https://example.com/gulero.jpg"},
+                {"nombre": "Alfajor Tatín",      "precio": "1.000", "imagen": "https://example.com/tatin.jpg"},
+                {"nombre": "Chupetín con Chicle","precio": "500",   "imagen": "https://example.com/chupetin.jpg"},
+            ]
+        },
+        {
+            "nombre": "Desayuno",
+            "productos": [
+                {"nombre": "Café",      "precio": "1.500", "imagen": "https://example.com/cafe.jpg"},
+                {"nombre": "Medialuna", "precio": "500",   "imagen": "https://example.com/medialuna.jpg"},
+                {"nombre": "Criollo",   "precio": "200",   "imagen": "https://example.com/criollo.jpg"},
+            ]
+        },
+        {
+            "nombre": "Postres",
+            "productos": [
+                {"nombre": "Helado", "precio": "1.000", "imagen": "https://example.com/helado.jpg"},
+            ]
+        },
+        {
+            "nombre": "Bebidas",
+            "productos": [
+                {"nombre": "Pepsi 500 ml", "precio": "2.500", "imagen": "https://example.com/pepsi500.jpg"},
+                {"nombre": "Pepsi 1,5 L",  "precio": "5.000", "imagen": "https://example.com/pepsi15.jpg"},
+                {"nombre": "Seven Up 500 ml","precio": "2.500","imagen": "https://example.com/7up.jpg"},
+            ]
+        },
+    ]  # Obtener desde la Base de Datos las categorías y productos
+
+    return render_template("cantina.html", categorias=categorias)
 
 # @app.route("/registro", methods=["POST"])
 # def registro():

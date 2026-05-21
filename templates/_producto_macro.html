@@ -1,0 +1,24 @@
+{% macro producto(nombre, precio, imagen=none) %}
+<div class="producto-card">
+    {% if imagen %}
+    <img src="{{ imagen }}" alt="{{ nombre }}">
+    {% endif %}
+    <p class="producto-nombre">{{ nombre }}</p>
+    <p class="producto-precio">${{ precio }}</p>
+</div>
+{% endmacro %}
+
+{% macro categoria(nombre, productos, promo=false) %}
+<section class="cantina-categoria">
+    <h2 class="categoria-titulo {{ 'categoria-promo' if promo }}">{{ nombre }}</h2>
+    <div class="categoria-carrusel {{ 'carrusel-promo' if promo }}">
+        {% for p in productos %}
+            {{ producto(
+                nombre  = p.nombre,
+                precio  = p.precio,
+                imagen  = p.imagen | default(none)
+            ) }}
+        {% endfor %}
+    </div>
+</section>
+{% endmacro %}

@@ -1,34 +1,23 @@
 {% extends "navbar.html" %}
+{% from "_producto_macro.html" import categoria %}
 
-{% block title %}Más{% endblock %}
+{% block title %}Cantina – Copa Renault{% endblock %}
 
 {% block content %}
 
 <div class="container">
 
-    <h1 class="page-title">
-        Más Información
-    </h1>
+    <p class="seccion-subtitulo">NUESTROS PRODUCTOS</p>
+    <h1 class="page-title">CANTINA</h1>
+    <p class="muted">*Imágenes a modo de representación</p>
 
-    <div class="card">
-
-        <h2>Sobre el torneo</h2>
-
-        <p class="muted">
-            La Copa Renault reúne equipos de distintas categorías y deportes.
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Reglamento</h2>
-
-        <p class="muted">
-            Los partidos se juegan bajo reglamento oficial.
-        </p>
-
-    </div>
+    {% for cat in categorias %}
+        {{ categoria(
+            nombre    = cat.nombre,
+            productos = cat.productos,
+            promo     = cat.promo | default(false)
+        ) }}
+    {% endfor %}
 
 </div>
 
