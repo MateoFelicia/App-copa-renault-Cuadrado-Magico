@@ -6,20 +6,18 @@
     imagen = none
 ) %}
 
-<a href="/noticias/{{ id }}">
-    {% if imagen %}
-    <img src="{{ imagen }}" alt="{{ titulo }}">
-    {% endif %}
-
-    <div>
-        <p>{{ titulo }}</p>
-
-        {% if descripcion %}
-        <p>{{ descripcion }}</p>
-        {% endif %}
-
-        <div>
-            {% if fecha %}<span>{{ fecha }}</span>{% endif %}
+<a href="/noticias/{{ id }}" class="noticia-card {{ 'sin-imagen' if not imagen }}">
+    {% if imagen %}<img src="{{ imagen }}" alt="{{ titulo }}">{% endif %}
+    <div class="noticia-body">
+        {% if tag %}<span class="noticia-tag">{{ tag }}</span>{% endif %}
+        <p class="noticia-titulo">{{ titulo }}</p>
+        {% if descripcion %}<p class="noticia-descripcion">{{ descripcion }}</p>{% endif %}
+        <div class="noticia-meta">
+            {% if fecha %}<span class="noticia-fecha">{{ fecha }}</span>{% endif %}
+            {% if autor %}
+                <span class="noticia-meta-sep">·</span>
+                <span class="noticia-autor">{{ autor }}</span>
+            {% endif %}
         </div>
     </div>
 </a>

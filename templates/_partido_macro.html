@@ -1,91 +1,60 @@
 {% macro partido(
-hora,
-equipo_local,
-equipo_visitante,
-goles_local = none,
-goles_visitante = none,
-deporte = none,
-genero = none,
-categoria = none,
-estado = "prox",
-minuto = none
-
+    hora,
+    equipo_local,
+    equipo_visitante,
+    goles_local      = none,
+    goles_visitante  = none,
+    categoria        = "Mayor",
+    deporte          = "Fútbol",
+    genero           = "Masculino",
+    estado           = "prox",
+    minuto           = none,
+    cancha           = none
 ) %}
 
-<div class="partido-card">
+<div class="partido-card partido-{{ estado }} partido-{{ categoria | lower }}">
 
-    <!-- TOP -->
-    <div class="partido-top">
-
-        <span class="partido-hora">
-            {{ hora }}
-        </span>
+    <!-- Hora + estado -->
+    <div class="partido-tiempo">
+        <span class="partido-hora">{{ hora }}</span>
 
         {% if estado == "terminado" %}
-            <span class="estado estado-fin">
-                FINALIZADO
-            </span>
-
+            <span class="partido-estado">FT</span>
         {% elif estado == "live" %}
-            <span class="estado estado-live">
-                EN VIVO
+            <span class="partido-minuto">
+                {{ minuto if minuto else "EN VIVO" }}
             </span>
-
         {% else %}
-            <span class="estado estado-prox">
-                PRÓXIMO
-            </span>
+            <span class="partido-estado">—</span>
         {% endif %}
-
     </div>
 
-    <!-- TAGS -->
-    <div class="partido-tags">
+    <!-- Equipos + meta -->
+    <div class="partido-info">
 
-        <span class="tag">
-            {{ deporte }}
-        </span>
-
-        <span class="tag">
-            {{ genero }}
-        </span>
-
-        <span class="tag">
-            {{ categoria }}
-        </span>
-
-    </div>
-
-    <!-- EQUIPOS -->
-    <div class="partido-equipos">
-
-        <div class="equipos">
-
-            <div class="equipo">
-                {{ equipo_local }}
-            </div>
-
-            <div class="equipo">
-                {{ equipo_visitante }}
-            </div>
-
-        </div>
-
-        <!-- RESULTADO -->
-        <div class="resultado">
-
-            {% if goles_local is not none %}
-                <span>{{ goles_local }}</span>
-                <span>-</span>
-                <span>{{ goles_visitante }}</span>
-
-            {% else %}
-                <span>-</span>
-                <span>-</span>
+        <div class="partido-meta">
+            <span class="partido-categoria">{{ categoria }}</span>
+            <span class="partido-meta-sep">·</span>
+            <span class="partido-genero">{{ genero }}</span>
+            {% if cancha %}
+            <span class="partido-meta-sep">·</span>
+            <span class="partido-cancha">🏟 {{ cancha }}</span>
             {% endif %}
-
         </div>
 
+        <span class="partido-equipo">{{ equipo_local }}</span>
+        <span class="partido-equipo">{{ equipo_visitante }}</span>
+    </div>
+
+    <!-- Marcador -->
+    <div class="partido-marcador">
+        {% if goles_local is not none %}
+            <span class="partido-gol">{{ goles_local }}</span>
+            <span class="partido-gol">{{ goles_visitante }}</span>
+        {% else %}
+            <span class="partido-gol sin-dato">—</span>
+            <span class="partido-gol sin-dato">—</span>
+        {% endif %}
     </div>
 
 </div>

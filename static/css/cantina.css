@@ -1,0 +1,317 @@
+/* ════════════════════════════════════════
+   CANTINA.CSS
+   Depende de las variables en style.css
+════════════════════════════════════════ */
+
+/* ── Layout general ── */
+.container {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ── Títulos de página ── */
+.page-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.seccion-subtitulo {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.muted {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+/* ════════════════════════════════════════
+   FILTROS DE CATEGORÍA (pills)
+════════════════════════════════════════ */
+.cantina-filtros {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: 24px;
+}
+
+.cantina-filtros::-webkit-scrollbar { display: none; }
+
+.cantina-filtros button {
+    background: var(--surface);
+    color: var(--text-muted);
+    border: none;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+.cantina-filtros button.activo,
+.cantina-filtros button:first-child {
+    background: var(--accent);
+    color: #000;
+}
+
+/* ════════════════════════════════════════
+   SECCIÓN / CATEGORÍA
+════════════════════════════════════════ */
+.cantina-categoria {
+    margin-bottom: 28px;
+}
+
+.categoria-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.categoria-promo .categoria-titulo,
+.categoria-titulo.categoria-promo {
+    color: var(--accent);
+}
+
+/* ════════════════════════════════════════
+   LISTA DE PRODUCTOS (estilo fila)
+════════════════════════════════════════ */
+.categoria-carrusel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ── Producto card (fila) ── */
+.producto-card {
+    display: grid;
+    grid-template-columns: 52px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    transition: background 0.15s;
+}
+
+.producto-card:active {
+    background: var(--surface-2);
+}
+
+/* Imagen / ícono del producto */
+.producto-card img {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #2e2200;
+    flex-shrink: 0;
+}
+
+/* Placeholder si no hay imagen */
+.producto-card:not(:has(img)) {
+    grid-template-columns: 1fr auto;
+}
+
+/* Textos */
+.producto-nombre {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+/* Descripción — si la agregás */
+.producto-descripcion {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.producto-precio {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════
+   CARRUSEL HORIZONTAL (si promo=true)
+════════════════════════════════════════ */
+.carrusel-promo {
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 10px;
+}
+
+.carrusel-promo::-webkit-scrollbar { display: none; }
+
+.carrusel-promo .producto-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px auto auto;
+    min-width: 140px;
+    max-width: 140px;
+    padding: 10px;
+    align-items: start;
+}
+
+.carrusel-promo .producto-card img {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.carrusel-promo .producto-precio {
+    color: var(--accent);
+}
+
+/* ════════════════════════════════════════
+   SECCIÓN RESERVAR UN LUGAR
+════════════════════════════════════════ */
+.reserva-section {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.reserva-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.reserva-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Fila de horarios */
+.reserva-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.reserva-horarios {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.reserva-horarios button {
+    background: var(--surface-2);
+    color: var(--text);
+    border: none;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.reserva-horarios button.activo {
+    background: var(--accent);
+    color: #000;
+}
+
+/* Fila de personas */
+.reserva-personas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reserva-personas span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.reserva-counter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.reserva-counter button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: opacity 0.15s;
+}
+
+.reserva-counter button:active {
+    opacity: 0.7;
+}
+
+.reserva-counter .cantidad {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Botón confirmar */
+.btn-confirmar {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: var(--radius);
+    padding: 16px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 8px;
+    transition: opacity 0.15s;
+}
+
+.btn-confirmar:active {
+    opacity: 0.8;
+}

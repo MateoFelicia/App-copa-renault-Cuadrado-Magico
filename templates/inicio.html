@@ -1,10 +1,13 @@
 {% extends "navbar.html" %}
+{% from "_noticia_macro.html" import noticia %} 
 
 {% block title %}
 Inicio
 {% endblock %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
 
 <!-- <div class="container">
 
@@ -13,35 +16,35 @@ Inicio
     </h1>
 
     <div class="card">
-
+        
         <h2>Bienvenido</h2>
-
+        
         <p class="muted">
             Seguí todos los partidos, resultados y noticias del torneo.
         </p>
 
         <br>
-
+        
         <a href="/partidos">
             <button class="btn">
                 Ver Partidos
             </button>
         </a>
-
+        
     </div>
-
+    
 </div> -->
 
 <div class="inicio-wrapper">
     <p class="seccion-titulo">Acceso Rápido</p>
-
+    
     {% set accesos = [
         {"label": "Fixture", "url": "partidos", "img": "fixture.png"},
         {"label": "Cantina", "url": "cantina", "img": "cantina.png"},
         {"label": "Mapa", "url": "mapa", "img": "mapa.png"},
         {"label": "Noticias","url": "noticias", "img": "noticias.png"}
     ] %}
-
+    
     <div class="acceso-grid">
         {% for a in accesos %}
         <a href="{{ a.url }}">
@@ -54,26 +57,25 @@ Inicio
 <p class="seccion-titulo">Últimas Noticias</p>
 
 <div class="noticias-lista">
-    {% for n in noticias[:3] %}
-    <a href="/noticias/<id>" class="noticia-card">
-        <img src="{{ n.imagen }}" alt="{{ n.titulo }}">
-        <div class="noticia-info">
-            <p class="noticia-titulo">{{ n.titulo }}</p>
-            <p class="noticia-desc">{{ n.descripcion }}</p>
-            <p class="noticia-fecha">{{ n.fecha }}</p>
-        </div>
-    </a>
-    {% endfor %}
-</div>
+    {% for n in noticias[:2] %}
+    {{ noticia(
+        id          = n.id,
+            titulo      = n.titulo,
+            descripcion = n.descripcion | default(none),
+            fecha       = n.fecha       | default(none),
+            imagen      = n.imagen      | default(none)
+        ) }}
+        {% endfor %}
+    </div>
 
-<a href="/noticias" class="btn-ver-mas">Ver todas las noticias</a>
-
-<div id="carrusel" style="overflow: hidden; width: 100%; position: relative;">
+    <a href="/noticias" class="btn-ver-mas">Ver todas las noticias</a>
+    
+    <div id="carrusel" style="overflow: hidden; width: 100%; position: relative;">
     <div id="track" style="display: flex; transition: transform 0.5s ease;">
         {% for img in sponsors %}
         <img 
-            src="{{ img }}"
-            style="min-width: 100%; height: 200px; object-fit: cover;"
+        src="{{ img }}"
+        style="min-width: 100%; height: 200px; object-fit: cover;"
         >
         {% endfor %}
     </div>

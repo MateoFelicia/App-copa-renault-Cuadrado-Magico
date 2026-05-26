@@ -7,58 +7,70 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/partidos.css') }}">
 
-<div style="padding: 24px 16px 8px;">
-    <h1 class="titulo-partidos">PARTIDOS</h1>
-<div>
-    <h1 style="font-size: 22px; font-weight: 800;">PARTIDOS</h1>
-    <a href="/fixture" style="font-size: 22px; font-weight: 800;">FIXTURE</a>
+<div id="partidos-layout">
 
-    <div class="filtros">
-        {% for cat in ["Todas", "Mayor", "Intermedia", "Menor"] %}
-        <a href="/partidos/{{ cat }}/{{ deporte_activo }}/{{ genero_activo }}">
-            <button>
-                {{ cat }}
-            </button>
-        </a>
-        {% endfor %}
+    <!-- ── Header ─────────────────────────────── -->
+    <div id="partidos-header">
+        <h1>PARTIDOS</h1>
+        <a href="/fixture">FIXTURE</a>
     </div>
 
-    <div class="filtros" style="margin-top: 8px;">
-        {% for dep in ["Todos", "Fútbol", "Básquet", "Vóley"] %}
-        <a href="/partidos/{{ categoria_activa }}/{{ dep }}/{{ genero_activo }}">
-            <button>
-                {{ dep }}
-            </button>
-        </a>
-        {% endfor %}
+    <!-- ── Filtros ────────────────────────────── -->
+    <div id="filtros-wrapper">
+
+        <div>
+            <p class="filtros-label">Categoría</p>
+            <div class="filtros">
+                {% for cat in ["Todas", "Mayor", "Intermedia", "Menor"] %}
+                <a href="/partidos/{{ cat }}/{{ deporte_activo }}/{{ genero_activo }}">
+                    <button class="{{ 'activo' if cat == categoria_activa else '' }}">{{ cat }}</button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <p class="filtros-label">Deporte</p>
+            <div class="filtros">
+                {% for dep in ["Todos", "Fútbol", "Básquet", "Vóley"] %}
+                <a href="/partidos/{{ categoria_activa }}/{{ dep }}/{{ genero_activo }}">
+                    <button class="{{ 'activo' if dep == deporte_activo else '' }}">{{ dep }}</button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <p class="filtros-label">Género</p>
+            <div class="filtros">
+                {% for gen in ["Todos", "Masculino", "Femenino", "Mixto"] %}
+                <a href="/partidos/{{ categoria_activa }}/{{ deporte_activo }}/{{ gen }}">
+                    <button class="{{ 'activo' if gen == genero_activo else '' }}">{{ gen }}</button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
 
-    <div class="filtros" style="margin-top: 8px;">
-        {% for gen in ["Todos", "Mixto", "Masculino", "Femenino"] %}
-            <a href="/partidos/{{ categoria_activa }}/{{ deporte_activo }}/{{ gen }}">
-                <button>
-                    {{ gen }}
-                </button>
-            </a>
+    <!-- ── Lista de partidos ──────────────────── -->
+    <div id="lista-partidos">
+        {% for p in partidos %}
+            {{ partido(
+                hora             = p.hora,
+                equipo_local     = p.equipo_local,
+                equipo_visitante = p.equipo_visitante,
+                goles_local      = p.goles_local if p.goles_local is defined else none,
+                goles_visitante  = p.goles_visitante if p.goles_visitante is defined else none,
+                deporte          = p.deporte,
+                genero           = p.genero,
+                categoria        = p.categoria,
+                estado           = p.estado,
+                cancha           = p.cancha if p.cancha is defined else none
+            )}}
         {% endfor %}
     </div>
 
 </div>
-
-{% for p in partidos %}
-    {{ partido(
-        hora = p.hora,
-        equipo_local = p.equipo_local,
-        equipo_visitante = p.equipo_visitante,
-
-        goles_local = p.goles_local,
-        goles_visitante = p.goles_visitante,
-
-        deporte = p.deporte,
-        genero = p.genero,
-        categoria = p.categoria,
-        estado = p.estado
-    )}}
-{% endfor %}
 
 {% endblock %}

@@ -1,0 +1,206 @@
+/* ════════════════════════════════════════
+   NOTICIAS.CSS
+   Depende de las variables en style.css
+════════════════════════════════════════ */
+
+/* ── Header de página ── */
+.noticias-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 16px 12px;
+}
+
+.noticias-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+.noticias-header-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.noticias-header-icons a {
+    color: var(--text-muted);
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.noticias-header-icons a:hover {
+    color: var(--text);
+}
+
+/* ════════════════════════════════════════
+   LISTA DE NOTICIAS
+════════════════════════════════════════ */
+.noticias-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 16px 24px;
+}
+
+/* ── Tarjeta de noticia ── */
+.noticia-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    margin-bottom: 10px;
+    transition: background 0.15s;
+    min-height: 110px;
+}
+
+/* Noticia sin imagen → una sola columna */
+.noticia-card.sin-imagen {
+    grid-template-columns: 1fr;
+}
+
+.noticia-card:active {
+    background: var(--surface-2);
+}
+
+/* ── Imagen ── */
+.noticia-card img {
+    width: 110px;
+    height: 100%;
+    min-height: 110px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* ── Cuerpo de texto ── */
+.noticia-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 14px 14px 14px 12px;
+    overflow: hidden;
+}
+
+/* Tag "Durante la Copa" / "Antes de la Copa" */
+.noticia-tag {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Título */
+.noticia-titulo {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Descripción */
+.noticia-descripcion {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Meta: fecha · autor */
+.noticia-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.noticia-fecha,
+.noticia-autor {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.noticia-meta-sep {
+    font-size: 10px;
+    color: var(--surface-2);
+}
+
+/* ════════════════════════════════════════
+   DETALLE DE NOTICIA
+════════════════════════════════════════ */
+.noticia-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px 32px;
+}
+
+/* Botón volver */
+.noticia-detalle-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    transition: color 0.2s;
+}
+
+.noticia-detalle-volver:hover {
+    color: var(--text);
+}
+
+/* Tag en detalle */
+.noticia-detalle .noticia-tag {
+    margin-bottom: -4px;
+}
+
+/* Título grande */
+.noticia-detalle h1 {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+
+/* Fecha en detalle */
+.noticia-detalle .noticia-meta {
+    margin-top: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--surface);
+}
+
+/* Imagen de portada */
+.noticia-detalle img {
+    width: 100%;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+/* Cuerpo del artículo */
+.noticia-detalle .noticia-contenido {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #cccccc;
+}
+
+.noticia-detalle .noticia-contenido p + p {
+    margin-top: 12px;
+}
