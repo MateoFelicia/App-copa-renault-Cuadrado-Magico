@@ -1,19 +1,10 @@
-from flask import Flask, render_template, request
-import sqlite3
+from flask import Blueprint, render_template
+from database import get_db
 
-from flask import redirect, url_for
+noticias_bp = Blueprint('noticias', __name__)
 
-app = Flask(__name__)
-
-@app.route("/noticias", methods=["GET"]) # get, delete, upgrade
+@noticias_bp.route("/noticias", methods=["GET"])
 def noticias():
-
-    conexion = sqlite3.connect("database.db")
-    cursor = conexion.cursor()
-
-    cursor.execute(f"SELECT * FROM noticias")
-    datos = cursor.fetchall()
-
-    conexion.close()
-
+    db = get_db()
+    datos = db.execute("SELECT * FROM noticias").fetchall()
     return render_template("noticias.html", noticias=datos)

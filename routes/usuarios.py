@@ -1,20 +1,10 @@
-from flask import Flask, render_template, request
-import sqlite3
+from flask import Blueprint, render_template
+from database import get_db
 
-from flask import redirect, url_for
+usuarios_bp = Blueprint('usuarios',__name__)
 
-app = Flask(__name__)
-
-@app.route("/usuarios", methods=["GET"])
+@usuarios_bp.route("/usuarios", methods=["GET"])
 def usuarios():
-    
-
-    conexion = sqlite3.connect("database.db")
-    cursor = conexion.cursor()
-
-    cursor.execute(f"SELECT * FROM usuarios")
-    datos = cursor.fetchall()
-
-    conexion.close()
-
+    db = get_db()
+    datos = db.execute("SELECT * FROM usuarios").fetchall()
     return render_template("usuarios.html", usuarios=datos)

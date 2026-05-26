@@ -1,23 +1,7 @@
-from flask import Flask, render_template, request
-import sqlite3
+from flask import Blueprint, render_template
 
-from flask import redirect, url_for
+cantina_bp = Blueprint('cantina', __name__)
 
-app = Flask(__name__)
-
-@app.route("/cantina", methods=["GET"])
+@cantina_bp.route("/cantina", methods=["GET"])
 def cantina():
-    try:
-        conexion = sqlite3.connect("database.db")
-        cursor = conexion.cursor()
-        
-        cursor.execute(f"SELECT * FROM cantina")
-        datos = cursor.fetchall()
-        
-        conexion.close()
-        
-        return render_template("cantina.html", cantina=datos)
-        
-    except sqlite3.Error as e:
-        print(f"Error en la base de datos: {e}")
-        return "Error al cargar los datos de la cantina", 500
+    return render_template("cantina.html")

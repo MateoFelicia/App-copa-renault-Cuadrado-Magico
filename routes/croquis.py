@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request
-import sqlite3
+from flask import  render_template, Blueprint
 
-from flask import redirect, url_for
+croquis_bp = Blueprint('croquis', __name__)
 
-app = Flask(__name__)
-
-@app.route("/croquis", methods=["GET"])
+@croquis_bp.route("/croquis", methods=["GET"])
 def croquis():
     return render_template("croquis.html")
