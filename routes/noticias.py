@@ -6,5 +6,9 @@ noticias_bp = Blueprint('noticias', __name__)
 @noticias_bp.route("/noticias", methods=["GET"])
 def noticias():
     db = get_db()
-    datos = db.execute("SELECT * FROM noticias").fetchall()
+    datos = []
+    for doc in db.collection("noticias").stream():
+        noticia = doc.to_dict()
+        noticia['id'] = doc.id
+        datos.append(noticia)
     return render_template("noticias.html", noticias=datos)
