@@ -1,199 +1,26 @@
+from database import database
 from flask import Flask
-import database
 
 app = Flask(__name__)
-
-# # Ruta principal
-# @app.route("/")
-# def inicio():
-#     return render_template("index.html")
-
-@app.route("/")
-def inicio_():
-    sponsors = [
-        "https://cdn.iconscout.com/icon/free/png-256/free-coca-cola-logo-icon-svg-download-png-1579762.png",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8il-Fph_iLce9tKXGbAh978ujKjX1ivZvZg&s",
-        "https://upload.wikimedia.org/wikipedia/commons/b/b9/Sprite_Logo.svg"
-    ] # Obtener desde la Base de Datos las imagenes de los sponsor
-    noticias = [
-        {
-            "id": 1,
-            "titulo": "Resultados de la jornada 2",
-            "descripcion": "Repasá todos los goles, posiciones y figuras destacadas del fin de semana.",
-            "fecha": "12 Jun 2025",
-            "imagen": "https://example.com/foto1.jpg"
-        },
-        {
-            "id": 2,
-            "titulo": "Convocatoria para la jornada 3",
-            "descripcion": "Ya están confirmados los horarios y canchas para el próximo fin de semana.",
-            "fecha": "10 Jun 2025",
-            "imagen": "https://example.com/foto2.jpg"
-        }
-    ] # Obtener desde la Base de Datos las primeras 2 noticias ordenadas desde la mas reciente a la mas antigua
-    return render_template("inicio.html", noticias=noticias, sponsors=sponsors)
 database.init_app(app)
 
-@app.route("/partidos", defaults={"categoria": "Todas", "deporte": "Todos", "genero": "Todos"})
-@app.route("/partidos/<categoria>/<deporte>/<genero>")
-def partidos(categoria, deporte, genero):
-
-<<<<<<< HEAD
-    todos = [
-    {"hora": "16:30", "equipo_local": "Renault B",  "equipo_visitante": "San Martín", "categoria": "Menor",     "genero": "Masculino", "deporte": "Fútbol",  "estado": "prox",      "cancha": "Cancha 1"},
-    {"hora": "19:00", "equipo_local": "Renault C",  "equipo_visitante": "Huracán",    "categoria": "Menor",     "genero": "Mixto",     "deporte": "Básquet", "estado": "prox",      "cancha": "Gimnasio"},
-    {"hora": "13:45", "equipo_local": "Lourdes",    "equipo_visitante": "Belgrano",   "categoria": "Menor",     "genero": "Femenino",  "deporte": "Fútbol",  "estado": "live",      "cancha": "Cancha 3", "goles_local": 0, "goles_visitante": 1},
-    {"hora": "10:30", "equipo_local": "San José",   "equipo_visitante": "Sag. Familia","categoria": "Mayor",    "genero": "Masculino", "deporte": "Fútbol",  "estado": "terminado", "cancha": "Cancha 1", "goles_local": 2, "goles_visitante": 1},
-]
-
-    filtrados = []
-
-    for p in todos:
-        if (categoria == "Todas" or p["categoria"] == categoria):
-            if (deporte == "Todos" or p["deporte"] == deporte):
-                if (genero == "Todos" or p["genero"] == genero):
-                    filtrados.append(p)
-
-    return render_template(
-        "partidos.html",
-        partidos=filtrados,
-        categoria_activa=categoria,
-        deporte_activo=deporte,
-        genero_activo=genero
-    )
-
-@app.route("/fixture")
-def fixture():
-    return render_template("fixture.html")
-
-@app.route("/mapa")
-def mapa():
-    return render_template("mapa.html")
-
-@app.route("/noticias", defaults={"id": ""})
-@app.route("/noticias/<id>")
-def noticias(id):
-    noticias = [
-        {
-            "id": 1,
-            "titulo": "Resultados de la jornada 2",
-            "descripcion": "Repasá todos los goles, posiciones y figuras destacadas del fin de semana.",
-            "fecha": "12 Jun 2025",
-            "imagen": "https://example.com/foto1.jpg"
-        },
-        {
-            "id": 2,
-            "titulo": "Convocatoria para la jornada 3",
-            "descripcion": "Ya están confirmados los horarios y canchas para el próximo fin de semana.",
-            "fecha": "10 Jun 2025",
-            "imagen": "https://example.com/foto2.jpg"
-        },
-    ] # Obtener desde la Base de Datos las noticias ordenadas desde la mas reciente a la mas antigua
-    
-    return render_template("noticias.html", noticias=noticias, id=id)
-
-@app.route("/cantina")
-def cantina():
-    categorias = [
-        {
-            "nombre": "¡¡Super Promos!!",
-            "promo": True,
-            "productos": [
-                {"nombre": "Café + 3 Criollos", "precio": "2.000", "imagen": "https://example.com/promo1.jpg"},
-            ]
-        },
-        {
-            "nombre": "Almuerzo",
-            "productos": [
-                {"nombre": "Choripán",    "precio": "8.000", "imagen": "https://example.com/choripan.jpg"},
-                {"nombre": "Hamburguesa", "precio": "7.000", "imagen": "https://example.com/hamburguesa.jpg"},
-                {"nombre": "Cono de Papas","precio": "4.500", "imagen": "https://example.com/papas.jpg"},
-            ]
-        },
-        {
-            "nombre": "Golosina",
-            "productos": [
-                {"nombre": "Alfajor Gulero",     "precio": "2.000", "imagen": "https://example.com/gulero.jpg"},
-                {"nombre": "Alfajor Tatín",      "precio": "1.000", "imagen": "https://example.com/tatin.jpg"},
-                {"nombre": "Chupetín con Chicle","precio": "500",   "imagen": "https://example.com/chupetin.jpg"},
-            ]
-        },
-        {
-            "nombre": "Desayuno",
-            "productos": [
-                {"nombre": "Café",      "precio": "1.500", "imagen": "https://example.com/cafe.jpg"},
-                {"nombre": "Medialuna", "precio": "500",   "imagen": "https://example.com/medialuna.jpg"},
-                {"nombre": "Criollo",   "precio": "200",   "imagen": "https://example.com/criollo.jpg"},
-            ]
-        },
-        {
-            "nombre": "Postres",
-            "productos": [
-                {"nombre": "Helado", "precio": "1.000", "imagen": "https://example.com/helado.jpg"},
-            ]
-        },
-        {
-            "nombre": "Bebidas",
-            "productos": [
-                {"nombre": "Pepsi 500 ml", "precio": "2.500", "imagen": "https://example.com/pepsi500.jpg"},
-                {"nombre": "Pepsi 1,5 L",  "precio": "5.000", "imagen": "https://example.com/pepsi15.jpg"},
-                {"nombre": "Seven Up 500 ml","precio": "2.500","imagen": "https://example.com/7up.jpg"},
-            ]
-        },
-    ]  # Obtener desde la Base de Datos las categorías y productos
-
-    return render_template("cantina.html", categorias=categorias)
-
-# @app.route("/registro", methods=["POST"])
-# def registro():
-#     nombre = request.form["nombre"]
-#     email = request.form["email"]
-#     password = request.form["password"]
-
-#     conexion = sqlite3.connect("database.db")
-#     cursor = conexion.cursor()
-
-#     cursor.execute(
-#         "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)",
-#         (nombre, email, password)
-#     )
-
-#     conexion.commit()
-#     conexion.close()
-
-#     from flask import redirect, url_for
-
-#     return redirect(url_for("usuarios"))
-
-# @app.route("/usuarios")
-# def usuarios():
-#     import sqlite3
-
-#     conexion = sqlite3.connect("database.db")
-#     cursor = conexion.cursor()
-
-#     cursor.execute("SELECT * FROM usuarios")
-#     datos = cursor.fetchall()
-
-#     conexion.close()
-
-#     return render_template("usuarios.html", usuarios=datos)
-
-=======
 from routes.inicio import inicio_bp
-from routes.noticias import noticias_bp # importamos las variables(rutas) de cada archivo de routes
+from routes.noticias import noticias_bp
+from routes.cantina import cantina_bp
 from routes.croquis import croquis_bp
 from routes.sponsors import sponsors_bp
 from routes.usuarios import usuarios_bp
 from routes.registros import registro_bp
+from routes.partidos import partidos_bp
 
 app.register_blueprint(inicio_bp)
-app.register_blueprint(noticias_bp) # agregamos las rutas a la app
+app.register_blueprint(noticias_bp)
 app.register_blueprint(cantina_bp)
 app.register_blueprint(croquis_bp)
 app.register_blueprint(sponsors_bp)
 app.register_blueprint(usuarios_bp)
 app.register_blueprint(registro_bp)
->>>>>>> origin/backend
+app.register_blueprint(partidos_bp)
 
 if __name__ == "__main__":
+    app.run(debug=True, port=5001)
