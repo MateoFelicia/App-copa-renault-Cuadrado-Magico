@@ -1,18 +1,15 @@
-import sqlite3
+import firebase_admin
+from firebase_admin import credentials, firestore
 
-conexion = sqlite3.connect("database.db")
-cursor = conexion.cursor()
+cred = credentials.Certificate("firebase_credentials.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT,
-    email TEXT,
-    password TEXT
-)
-""")
+# Crea la colección "usuarios" con un usuario de prueba
+db.collection("usuarios").add({
+    "nombre": "Admin",
+    "email": "admin@copa.com",
+    "password": "1234"
+})
 
-conexion.commit()
-conexion.close()
-
-print("Base de datos creada correctamente")
+print("Colecciones inicializadas correctamente")

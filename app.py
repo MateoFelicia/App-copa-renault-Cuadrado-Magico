@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request
-import sqlite3
-
-from flask import redirect, url_for
+from flask import Flask
+import database
 
 app = Flask(__name__)
 
@@ -34,14 +32,15 @@ def inicio_():
         }
     ] # Obtener desde la Base de Datos las primeras 2 noticias ordenadas desde la mas reciente a la mas antigua
     return render_template("inicio.html", noticias=noticias, sponsors=sponsors)
+database.init_app(app)
 
 @app.route("/partidos", defaults={"categoria": "Todas", "deporte": "Todos", "genero": "Todos"})
 @app.route("/partidos/<categoria>/<deporte>/<genero>")
 def partidos(categoria, deporte, genero):
 
+<<<<<<< HEAD
     todos = [
     {"hora": "16:30", "equipo_local": "Renault B",  "equipo_visitante": "San Martín", "categoria": "Menor",     "genero": "Masculino", "deporte": "Fútbol",  "estado": "prox",      "cancha": "Cancha 1"},
-    {"hora": "18:00", "equipo_local": "Renault A",  "equipo_visitante": "Godoy Cruz", "categoria": "Mayor",     "genero": "Femenino",  "deporte": "Fútbol",  "estado": "prox",      "cancha": "Cancha 2"},
     {"hora": "19:00", "equipo_local": "Renault C",  "equipo_visitante": "Huracán",    "categoria": "Menor",     "genero": "Mixto",     "deporte": "Básquet", "estado": "prox",      "cancha": "Gimnasio"},
     {"hora": "13:45", "equipo_local": "Lourdes",    "equipo_visitante": "Belgrano",   "categoria": "Menor",     "genero": "Femenino",  "deporte": "Fútbol",  "estado": "live",      "cancha": "Cancha 3", "goles_local": 0, "goles_visitante": 1},
     {"hora": "10:30", "equipo_local": "San José",   "equipo_visitante": "Sag. Familia","categoria": "Mayor",    "genero": "Masculino", "deporte": "Fútbol",  "estado": "terminado", "cancha": "Cancha 1", "goles_local": 2, "goles_visitante": 1},
@@ -180,6 +179,21 @@ def cantina():
 
 #     return render_template("usuarios.html", usuarios=datos)
 
+=======
+from routes.inicio import inicio_bp
+from routes.noticias import noticias_bp # importamos las variables(rutas) de cada archivo de routes
+from routes.croquis import croquis_bp
+from routes.sponsors import sponsors_bp
+from routes.usuarios import usuarios_bp
+from routes.registros import registro_bp
+
+app.register_blueprint(inicio_bp)
+app.register_blueprint(noticias_bp) # agregamos las rutas a la app
+app.register_blueprint(cantina_bp)
+app.register_blueprint(croquis_bp)
+app.register_blueprint(sponsors_bp)
+app.register_blueprint(usuarios_bp)
+app.register_blueprint(registro_bp)
+>>>>>>> origin/backend
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
