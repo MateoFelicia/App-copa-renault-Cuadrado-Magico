@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ "Editar" if noticia else "Nueva" }} Noticia{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <h1>{{ "Editar" if noticia else "Nueva" }} Noticia</h1>
+    <a href="/admin/noticias" class="btn btn-ghost">← Volver</a>
+</div>
+
+<div class="form-card">
+    <form method="POST">
+        <div class="form-group">
+            <label>Título</label>
+            <input name="titulo" required value="{{ noticia.titulo if noticia else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea name="descripcion">{{ noticia.descripcion if noticia else '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>URL de imagen</label>
+            <input name="imagen" value="{{ noticia.imagen if noticia else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Fecha</label>
+            <input name="fecha" value="{{ noticia.fecha if noticia else '' }}" placeholder="ej: 27/05/2026">
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
+</div>
+{% endblock %}
