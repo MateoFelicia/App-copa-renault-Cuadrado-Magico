@@ -12,7 +12,10 @@ from routes.sponsors import sponsors_bp
 from routes.usuarios import usuarios_bp
 from routes.registros import registro_bp
 from routes.partidos import partidos_bp
+<<<<<<< HEAD
 from routes.admin import admin_bp
+=======
+>>>>>>> 44263de85ad7a3a5873d3e80ccec9aa936633658
 
 app.register_blueprint(admin_bp)
 app.register_blueprint(inicio_bp)
