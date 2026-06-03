@@ -1,0 +1,26 @@
+{# sponsor_form.html #}
+{% extends "admin/base.html" %}
+{% block title %}{{ "Editar" if sponsor else "Nuevo" }} Sponsor{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1>{{ "Editar" if sponsor else "Nuevo" }} Sponsor</h1>
+    <a href="/admin/sponsors" class="btn btn-ghost">← Volver</a>
+</div>
+<div class="form-card">
+    <form method="POST">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input name="nombre" required value="{{ sponsor.nombre if sponsor else '' }}">
+        </div>
+        <div class="form-group">
+            <label>URL de imagen</label>
+            <input name="imagen" value="{{ sponsor.imagen if sponsor else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Link del sponsor</label>
+            <input name="url" value="{{ sponsor.url if sponsor else '' }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
+</div>
+{% endblock %}

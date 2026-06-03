@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – {% block title %}{% endblock %}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, sans-serif; background: #0f0f0f; color: #f0f0f0; display: flex; min-height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 220px; background: #1a1a1a; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px; border-right: 1px solid #2a2a2a; flex-shrink: 0; }
+        .sidebar-logo { font-size: 18px; font-weight: 800; color: #ffcc00; margin-bottom: 24px; letter-spacing: -0.5px; }
+        .sidebar a { color: #aaa; text-decoration: none; padding: 10px 12px; border-radius: 8px; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: background 0.15s, color 0.15s; }
+        .sidebar a:hover, .sidebar a.active { background: #2a2a2a; color: #fff; }
+        .sidebar-sep { height: 1px; background: #2a2a2a; margin: 12px 0; }
+
+        /* Main */
+        .main { flex: 1; padding: 32px; overflow-y: auto; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+        .page-header h1 { font-size: 22px; font-weight: 800; }
+
+        /* Botones */
+        .btn { display: inline-block; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; border: none; transition: opacity 0.15s; }
+        .btn-primary { background: #ffcc00; color: #000; }
+        .btn-danger  { background: #e53e3e; color: #fff; }
+        .btn-ghost   { background: #2a2a2a; color: #fff; }
+        .btn:hover   { opacity: 0.85; }
+
+        /* Tabla */
+        table { width: 100%; border-collapse: collapse; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+        th { text-align: left; padding: 12px 16px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #666; border-bottom: 1px solid #2a2a2a; }
+        td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid #1e1e1e; vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #222; }
+
+        /* Form */
+        .form-card { background: #1a1a1a; border-radius: 12px; padding: 28px; max-width: 600px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 13px; color: #888; margin-bottom: 6px; }
+        input, textarea, select { width: 100%; padding: 10px 14px; background: #111; border: 1px solid #2a2a2a; border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: border 0.15s; }
+        input:focus, textarea:focus, select:focus { border-color: #ffcc00; }
+        textarea { min-height: 100px; resize: vertical; }
+        .form-check { display: flex; align-items: center; gap: 10px; }
+        .form-check input { width: auto; }
+
+        /* Stats cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: #1a1a1a; border-radius: 12px; padding: 20px; }
+        .stat-card .num { font-size: 36px; font-weight: 800; color: #ffcc00; }
+        .stat-card .label { font-size: 13px; color: #666; margin-top: 4px; }
+
+        /* Badge */
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .badge-live   { background: #e53e3e22; color: #e53e3e; }
+        .badge-prox   { background: #2a2a2a; color: #888; }
+        .badge-term   { background: #22543d22; color: #68d391; }
+        .badge-promo  { background: #ffcc0022; color: #ffcc00; }
+
+        .actions { display: flex; gap: 8px; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">Admin</div>
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/noticias">Noticias</a>
+        <a href="/admin/partidos">Partidos</a>
+        <a href="/admin/cantina">Cantina</a>
+        <a href="/admin/sponsors">Sponsors</a>
+        <div class="sidebar-sep"></div>
+        <a href="/">← Ver sitio</a>
+    </aside>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

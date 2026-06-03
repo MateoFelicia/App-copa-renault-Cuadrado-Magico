@@ -1,0 +1,71 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ "Editar" if partido else "Nuevo" }} Partido{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <h1>{{ "Editar" if partido else "Nuevo" }} Partido</h1>
+    <a href="/admin/partidos" class="btn btn-ghost">← Volver</a>
+</div>
+
+<div class="form-card">
+    <form method="POST">
+        <div class="form-group">
+            <label>Hora</label>
+            <input name="hora" required value="{{ partido.hora if partido else '' }}" placeholder="ej: 10:00">
+        </div>
+        <div class="form-group">
+            <label>Equipo Local</label>
+            <input name="equipo_local" required value="{{ partido.equipo_local if partido else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Equipo Visitante</label>
+            <input name="equipo_visitante" required value="{{ partido.equipo_visitante if partido else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Goles Local</label>
+            <input name="goles_local" type="number" value="{{ partido.goles_local if partido and partido.goles_local is not none else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Goles Visitante</label>
+            <input name="goles_visitante" type="number" value="{{ partido.goles_visitante if partido and partido.goles_visitante is not none else '' }}">
+        </div>
+        <div class="form-group">
+            <label>Categoría</label>
+            <select name="categoria">
+                {% for cat in ["Mayor", "Sub-20", "Sub-17", "Sub-15"] %}
+                <option value="{{ cat }}" {{ "selected" if partido and partido.categoria == cat }}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Deporte</label>
+            <select name="deporte">
+                {% for dep in ["Fútbol", "Básquet", "Vóley", "Tenis"] %}
+                <option value="{{ dep }}" {{ "selected" if partido and partido.deporte == dep }}>{{ dep }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Género</label>
+            <select name="genero">
+                {% for g in ["Masculino", "Femenino", "Mixto"] %}
+                <option value="{{ g }}" {{ "selected" if partido and partido.genero == g }}>{{ g }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Estado</label>
+            <select name="estado">
+                {% for e in ["prox", "live", "terminado"] %}
+                <option value="{{ e }}" {{ "selected" if partido and partido.estado == e }}>{{ e }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Cancha</label>
+            <input name="cancha" value="{{ partido.cancha if partido else '' }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% block title %}Cantina{% endblock %}
+{% block content %}
+
+<div class="page-header">
+    <h1>Cantina</h1>
+    <a href="/admin/cantina/nueva-categoria" class="btn btn-primary">+ Nueva categoría</a>
+</div>
+
+{% for cat in categorias %}
+<div style="margin-bottom: 32px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+            <h2 style="font-size:16px; font-weight:700;">{{ cat.nombre }}</h2>
+            {% if cat.promo %}<span class="badge badge-promo">PROMO</span>{% endif %}
+        </div>
+        <div class="actions">
+            <a href="/admin/cantina/{{ cat.id }}/nuevo-producto" class="btn btn-ghost" style="font-size:13px;">+ Producto</a>
+            <a href="/admin/cantina/{{ cat.id }}/editar" class="btn btn-ghost" style="font-size:13px;">Editar cat.</a>
+            <form action="/admin/cantina/{{ cat.id }}/eliminar" method="POST" onsubmit="return confirm('¿Eliminar esta categoría y todos sus productos?')">
+                <button class="btn btn-danger" style="font-size:13px;">Eliminar</button>
+            </form>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr><th>Producto</th><th>Precio</th><th>Imagen</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+        {% for p in cat.productos %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>${{ p.precio }}</td>
+            <td>{{ "✓" if p.imagen else "—" }}</td>
+            <td class="actions">
+                <a href="/admin/cantina/{{ cat.id }}/productos/{{ p.id }}/editar" class="btn btn-ghost" style="font-size:12px;">Editar</a>
+                <form action="/admin/cantina/{{ cat.id }}/productos/{{ p.id }}/eliminar" method="POST" onsubmit="return confirm('¿Eliminar?')">
+                    <button class="btn btn-danger" style="font-size:12px;">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        {% if not cat.productos %}
+        <tr><td colspan="4" style="color:#555; font-size:13px;">Sin productos</td></tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+{% endblock %}

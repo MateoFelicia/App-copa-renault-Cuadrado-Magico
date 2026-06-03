@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}Sponsors{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h1>Sponsors</h1>
+    <a href="/admin/sponsors/nuevo" class="btn btn-primary">+ Nuevo sponsor</a>
+</div>
+<table>
+    <thead><tr><th>Nombre</th><th>URL</th><th>Imagen</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for s in sponsors %}
+    <tr>
+        <td>{{ s.nombre }}</td>
+        <td>{{ s.url or "—" }}</td>
+        <td>{{ "✓" if s.imagen else "—" }}</td>
+        <td class="actions">
+            <a href="/admin/sponsors/{{ s.id }}/editar" class="btn btn-ghost">Editar</a>
+            <form action="/admin/sponsors/{{ s.id }}/eliminar" method="POST" onsubmit="return confirm('¿Eliminar?')">
+                <button class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
