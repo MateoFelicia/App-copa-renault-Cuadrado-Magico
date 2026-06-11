@@ -3,7 +3,6 @@ from database import get_db
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
-# ─── Dashboard ────────────────────────────────────────────────
 @admin_bp.route("/")
 def dashboard():
     db = get_db()
