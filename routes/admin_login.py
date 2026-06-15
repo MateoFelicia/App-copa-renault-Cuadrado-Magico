@@ -1,16 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, jsonify, session, redirect, render_template
-import firebase_admin
-from firebase_admin import credentials, auth
+from firebase_admin import auth
 
 login_bp = Blueprint('admin_login', __name__)
-
-cred = credentials.Certificate("firebase_credentials.json")
-firebase_admin.initialize_app(cred)
-
-auth.set_custom_user_claims("Iw29cbeyWASl4VUM5BTgzCOl8Qr1", {"rol": "superadmin"})
-auth.set_custom_user_claims("zvCLe3q0DySAZtGNYQ5rMNbGlpZ2", {"rol": "superadmin"})
-auth.set_custom_user_claims("2NdttyMAqJNNr5SfJaQLhcgNCa83", {"rol": "superadmin"})
-auth.set_custom_user_claims("BNw7TUA6xVXhTtD6F6vEYQA4UNp2", {"rol": "superadmin"})
 
 @login_bp.route('/admin/verify', methods=['POST'])
 def verify_token():
@@ -27,10 +18,10 @@ def verify_token():
 @login_bp.route('/admin/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login.admin_login_page'))
+    return redirect(url_for('admin_login.admin_login_page'))
 
 @login_bp.route('/admin-login')
 def admin_login_page():
     if session.get('rol'):
-        return redirect('templates/admin/dashboard')
-    return render_template('templates/admin/login.html')
+        return redirect('/admin/')
+    return render_template('admin/login.html', error='Error')

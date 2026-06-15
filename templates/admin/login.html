@@ -153,9 +153,7 @@
         <h1>Iniciar sesión</h1>
         <p class="login-desc">Solo para administradores autorizados.</p>
 
-        {% if error %}
-        <div class="error-msg">{{ error }}</div>
-        {% endif %}
+        <div class="error-msg" id="error-msg" style="display:none;"></div>
 
         <div class="form-group">
             <label for="email">Email</label>
