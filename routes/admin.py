@@ -1,7 +1,16 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session
+from functools import wraps
 from database import get_db
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
+
+def login_requerido(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('rol'):
+            return redirect('/admin-login')
+        return f(*args, **kwargs)
+    return decorated_function
 
 @admin_bp.route("/")
 def dashboard():
