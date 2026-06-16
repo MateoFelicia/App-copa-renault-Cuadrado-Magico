@@ -13,6 +13,7 @@ def login_requerido(f):
     return decorated_function
 
 @admin_bp.route("/")
+@login_requerido
 def dashboard():
     db = get_db()
     stats = {
@@ -28,6 +29,7 @@ def dashboard():
 # NOTICIAS
 # ══════════════════════════════════════════════════════════════
 @admin_bp.route("/noticias")
+@login_requerido
 def admin_noticias():
     db = get_db()
     noticias = []
@@ -37,6 +39,7 @@ def admin_noticias():
     return render_template("admin/noticias.html", noticias=noticias)
 
 @admin_bp.route("/noticias/nueva", methods=["GET", "POST"])
+@login_requerido
 def nueva_noticia():
     if request.method == "POST":
         db = get_db()
@@ -50,6 +53,7 @@ def nueva_noticia():
     return render_template("admin/noticia_form.html", noticia=None)
 
 @admin_bp.route("/noticias/<id>/editar", methods=["GET", "POST"])
+@login_requerido
 def editar_noticia(id):
     db = get_db()
     ref = db.collection("noticias").document(id)
@@ -65,6 +69,7 @@ def editar_noticia(id):
     return render_template("admin/noticia_form.html", noticia=n)
 
 @admin_bp.route("/noticias/<id>/eliminar", methods=["POST"])
+@login_requerido
 def eliminar_noticia(id):
     db = get_db()
     db.collection("noticias").document(id).delete()
@@ -75,6 +80,7 @@ def eliminar_noticia(id):
 # PARTIDOS
 # ══════════════════════════════════════════════════════════════
 @admin_bp.route("/partidos")
+@login_requerido
 def admin_partidos():
     db = get_db()
     partidos = []
@@ -84,6 +90,7 @@ def admin_partidos():
     return render_template("admin/partidos.html", partidos=partidos)
 
 @admin_bp.route("/partidos/nuevo", methods=["GET", "POST"])
+@login_requerido
 def nuevo_partido():
     if request.method == "POST":
         db = get_db()
@@ -103,6 +110,7 @@ def nuevo_partido():
     return render_template("admin/partido_form.html", partido=None)
 
 @admin_bp.route("/partidos/<id>/editar", methods=["GET", "POST"])
+@login_requerido
 def editar_partido(id):
     db = get_db()
     ref = db.collection("partidos").document(id)
@@ -124,6 +132,7 @@ def editar_partido(id):
     return render_template("admin/partido_form.html", partido=p)
 
 @admin_bp.route("/partidos/<id>/eliminar", methods=["POST"])
+@login_requerido
 def eliminar_partido(id):
     db = get_db()
     db.collection("partidos").document(id).delete()
@@ -134,6 +143,7 @@ def eliminar_partido(id):
 # CANTINA — Categorías
 # ══════════════════════════════════════════════════════════════
 @admin_bp.route("/cantina")
+@login_requerido
 def admin_cantina():
     db = get_db()
     categorias = []
@@ -148,6 +158,7 @@ def admin_cantina():
     return render_template("admin/cantina.html", categorias=categorias)
 
 @admin_bp.route("/cantina/nueva-categoria", methods=["GET", "POST"])
+@login_requerido
 def nueva_categoria():
     if request.method == "POST":
         db = get_db()
@@ -160,6 +171,7 @@ def nueva_categoria():
     return render_template("admin/categoria_form.html", categoria=None)
 
 @admin_bp.route("/cantina/<cat_id>/editar", methods=["GET", "POST"])
+@login_requerido
 def editar_categoria(cat_id):
     db = get_db()
     ref = db.collection("categorias_cantina").document(cat_id)
@@ -174,6 +186,7 @@ def editar_categoria(cat_id):
     return render_template("admin/categoria_form.html", categoria=cat)
 
 @admin_bp.route("/cantina/<cat_id>/eliminar", methods=["POST"])
+@login_requerido
 def eliminar_categoria(cat_id):
     db = get_db()
     db.collection("categorias_cantina").document(cat_id).delete()
@@ -184,6 +197,7 @@ def eliminar_categoria(cat_id):
 # CANTINA — Productos
 # ══════════════════════════════════════════════════════════════
 @admin_bp.route("/cantina/<cat_id>/nuevo-producto", methods=["GET", "POST"])
+@login_requerido
 def nuevo_producto(cat_id):
     db = get_db()
     if request.method == "POST":
@@ -197,6 +211,7 @@ def nuevo_producto(cat_id):
     return render_template("admin/producto_form.html", producto=None, cat_id=cat_id, cat=cat)
 
 @admin_bp.route("/cantina/<cat_id>/productos/<prod_id>/editar", methods=["GET", "POST"])
+@login_requerido
 def editar_producto(cat_id, prod_id):
     db = get_db()
     ref = db.collection("categorias_cantina").document(cat_id).collection("productos").document(prod_id)
@@ -212,6 +227,7 @@ def editar_producto(cat_id, prod_id):
     return render_template("admin/producto_form.html", producto=p, cat_id=cat_id, cat=cat)
 
 @admin_bp.route("/cantina/<cat_id>/productos/<prod_id>/eliminar", methods=["POST"])
+@login_requerido
 def eliminar_producto(cat_id, prod_id):
     db = get_db()
     db.collection("categorias_cantina").document(cat_id).collection("productos").document(prod_id).delete()
@@ -222,6 +238,7 @@ def eliminar_producto(cat_id, prod_id):
 # SPONSORS
 # ══════════════════════════════════════════════════════════════
 @admin_bp.route("/sponsors")
+@login_requerido
 def admin_sponsors():
     db = get_db()
     sponsors = []
@@ -231,6 +248,7 @@ def admin_sponsors():
     return render_template("admin/sponsors.html", sponsors=sponsors)
 
 @admin_bp.route("/sponsors/nuevo", methods=["GET", "POST"])
+@login_requerido
 def nuevo_sponsor():
     if request.method == "POST":
         db = get_db()
@@ -243,6 +261,7 @@ def nuevo_sponsor():
     return render_template("admin/sponsor_form.html", sponsor=None)
 
 @admin_bp.route("/sponsors/<id>/editar", methods=["GET", "POST"])
+@login_requerido
 def editar_sponsor(id):
     db = get_db()
     ref = db.collection("sponsors").document(id)
@@ -257,6 +276,7 @@ def editar_sponsor(id):
     return render_template("admin/sponsor_form.html", sponsor=s)
 
 @admin_bp.route("/sponsors/<id>/eliminar", methods=["POST"])
+@login_requerido
 def eliminar_sponsor(id):
     db = get_db()
     db.collection("sponsors").document(id).delete()
