@@ -63,11 +63,22 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-logo">Admin</div>
+        {% if rol in ['superadmin'] %}
         <a href="/admin/">Dashboard</a>
+        {% endif %}
+        {% if rol in ['superadmin', 'noticias'] %}
         <a href="/admin/noticias">Noticias</a>
+        {% endif %}
+        {% if rol in ['superadmin', 'partidos'] %}
         <a href="/admin/partidos">Partidos</a>
+        {% endif %}
+        {% if rol in ['superadmin', 'cantina'] %}
         <a href="/admin/cantina">Cantina</a>
+        {% endif %}
+        {% if rol in ['superadmin', 'sponsors'] %}
         <a href="/admin/sponsors">Sponsors</a>
+        {% endif %}
+        <a href="/admin/logout">Logout</a>
         <div class="sidebar-sep"></div>
         <a href="/">← Ver sitio</a>
     </aside>

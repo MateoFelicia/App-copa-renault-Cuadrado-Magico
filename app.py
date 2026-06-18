@@ -1,9 +1,12 @@
 import database
-from flask import Flask
+from flask import Flask,session
 
 app = Flask(__name__)
 app.secret_key = "cuadradomagicoamaDios"
 database.init_app(app)
+@app.context_processor
+def inject_rol():
+    return dict(rol=session.get('rol'))
 
 from routes.inicio import inicio_bp
 from routes.noticias import noticias_bp
